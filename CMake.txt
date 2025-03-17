@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.10)
+project(lab2_binrsear)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+enable_testing()
+
+add_library(template_library src/library.cpp)
+
+target_include_directories(template_library PUBLIC include)
+
+add_executable(run_tests tests/test_basic.cpp)
+
+find_package(GTest REQUIRED)
+target_link_libraries(run_tests PRIVATE template_library GTest::GTest GTest::Main)
+
+add_test(NAME LongestDuplicateSubarrayTest COMMAND run_tests)
